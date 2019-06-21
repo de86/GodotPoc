@@ -1,0 +1,35 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/WorldGen/WorldGenerator.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/WorldRenderer/WorldRenderer.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/World/Terrain/TileBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/WorldRenderer/TerrainNodeMap.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/World/Terrain/CubePlaceholder.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/World/Terrain/CylinderPlaceholder.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/World/Terrain/PrismPlaceholder.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/FreeCam/FreeCam.gd" type="Script" id=9]
+
+[node name="Game" type="Node"]
+script = ExtResource( 1 )
+
+[node name="WorldGenerator" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="WorldRenderer" type="Node" parent="."]
+editor/display_folded = true
+script = ExtResource( 3 )
+TileBase = ExtResource( 4 )
+
+[node name="TerrainNodeMap" type="Node" parent="WorldRenderer"]
+script = ExtResource( 5 )
+Cube = ExtResource( 6 )
+Cylinder = ExtResource( 7 )
+Prism = ExtResource( 8 )
+
+[node name="FreeCam" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 9 )
+
+[node name="Camera" type="Camera" parent="FreeCam"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
